@@ -1,3 +1,5 @@
 tensorflow_inception_graph.pb
+imagenet_comp_graph_label_strings.txt
 .DS_Store
-libs/__pycache__
+libs/__pycache__/
+LICENSE
