@@ -60,11 +60,11 @@ channel = 134 # picking some feature channel to visualize
 img_noise = np.random.uniform(size=(224,224,3)) + 100.0
 
 def showarray(a, fmt='jpeg'):
-    # a = np.uint8(np.clip(a, 0, 1)*255)
-    # f = BytesIO()
-    # PIL.Image.fromarray(a).save(f, fmt)
-    # display(Image(data=f.getvalue()))
-    plt.imshow(a)
+    a = np.uint8(np.clip(a, 0, 1)*255)
+    f = BytesIO()
+    PIL.Image.fromarray(a).save(f, fmt)
+    img = Image(data=f.getvalue())
+    display(Image(data=f.getvalue()))
 
 def visstd(a, s=0.1):
     '''Normalize the image range for visualization'''
@@ -205,7 +205,7 @@ def render_lapnorm(t_obj, img0=img_noise, visfunc=visstd,
     return img[np.newaxis]
 
 def fractal_zoom(img0=img_noise, visfunc=visstd,
-                   n_iterations=50, gif_step=5, crop=1, neuron_1=195, neuron_2=188, gif_name='6-fractal.gif'):
+                   n_iterations=10, gif_step=5, crop=1, neuron_1=195, neuron_2=188, gif_name='6-fractal.gif'):
     img_copy = img_noise.copy()
     img_copy = img_copy[np.newaxis]
     imgs = []
@@ -233,5 +233,5 @@ def fractal_zoom(img0=img_noise, visfunc=visstd,
 
     gif.build_gif(imgs, saveto=gif_name)
 
-fractal_zoom(gif_name="1.gif", n_iterations=10)
-#fractal_zoom(neuron_1=channel, neuron_2=189, gif_name="2.gif", n_iterations=2000)
+fractal_zoom(gif_name="1.gif", gif_step=3, n_iterations=2000)
+fractal_zoom(neuron_1=channel, gif_step=3, neuron_2=189, gif_name="2.gif", n_iterations=2000)
